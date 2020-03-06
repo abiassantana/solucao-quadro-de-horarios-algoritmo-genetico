@@ -1,0 +1,1 @@
+# solucao-quadro-de-horarios-algoritmo-genetico
