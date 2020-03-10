@@ -1,0 +1,16 @@
+id,codigo,dia,hora,sequencia
+h1,2M23,segunda,8,1
+h2,2M45,segunda,10,2
+h3,2T12,segunda,13,3
+h4,3M23,terca,8,1
+h5,3M45,terca,10,2
+h6,3T12,terca,13,3
+h7,4M23,quarta,8,1
+h8,4M45,quarta,10,2
+h9,4T12,quarta,13,3
+h10,5M23,quinta,8,1
+h11,5M45,quinta,10,2
+h12,5T12,quinta,13,3
+h13,6M23,sexta,8,1
+h14,6M45,sexta,10,2
+h15,6T12,sexta,13,3
