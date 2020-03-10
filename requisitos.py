@@ -1,4 +1,8 @@
 
+
+# verifica se exitem aulas de disciplinas
+# do mesmo período no mesmo horário 
+# caso encontre retorna infinito
 def diciplina_mesmo_p_h(indiv):
     for gene in indiv:
         count = 0
@@ -8,9 +12,11 @@ def diciplina_mesmo_p_h(indiv):
             if periodo == indiv[i][1] and horario == indiv[i][3]:
                 count+=1
                 if count >= 2:
-                    return float("-inf")
+                    return float("+inf")
         return 0
 
+# verifica se exitem aulas de disciplinas do mesmo
+# professor no mesmo horário 
 def professor_mesmo_h(indiv):
     for gene in indiv:
         count = 0
@@ -20,10 +26,12 @@ def professor_mesmo_h(indiv):
             if prof == indiv[i][2] and horario == indiv[i][3]:
                 count+=1
                 if count >= 2:
-                    return float("-inf")
+                    return float("+inf")
         return 0
 
-def diciplina_mesmo_h(indiv):
+# verifica se exitem aulas da mesma
+# disciplina no mesmo dia 
+def diciplina_mesmo_dia(indiv):
     for gene in indiv:
         count = 0
         diciplina = gene
@@ -33,6 +41,8 @@ def diciplina_mesmo_h(indiv):
                 count+=1
                 if count >= 2:
                     print('chamou')
-                    return float("-inf")
+                    return 10
         return 0
+
+
 

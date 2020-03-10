@@ -1,7 +1,7 @@
 from algoritmo import algoritmo
 import requisitos as req
 
-requisitos = [req.diciplina_mesmo_p_h, req.professor_mesmo_h, req.diciplina_mesmo_h]
+requisitos = [req.diciplina_mesmo_p_h, req.professor_mesmo_h, req.diciplina_mesmo_dia]
 
-a = algoritmo('csv/salas.csv', 'csv/horarios.csv', 'csv/cadeiras.csv', 100, requisitos)
+a = algoritmo('csv/salas.csv', 'csv/horarios.csv', 'csv/cadeiras.csv', 50, requisitos)
 a.pontuador()
