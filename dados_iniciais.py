@@ -22,7 +22,7 @@ class gerador_dados_iniciais:
 
     def gerar_quadros_iniciais(self):
         cadeiras_temp = self.cadeiras.copy()
-        cromosomos = []
+        geracao = {0: {}}
         for e in range(self.tamanho_geracao):
             cromosomo = {}
             for i, row in self.cadeiras.iterrows():
@@ -34,5 +34,8 @@ class gerador_dados_iniciais:
                     row['periodo'],
                     row['professor'],
                     horario['id'].values[0]]
-            cromosomos.append(cromosomo)
-        return cromosomos
+            # print(cromosomo)
+            geracao[0][len(geracao[0])] = cromosomo
+        # print(geracao[0].keys())
+        # import ipdb; ipdb.set_trace()
+        return geracao
