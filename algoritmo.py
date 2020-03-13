@@ -12,17 +12,15 @@ class algoritmo:
         self.requisitos = requisitos
         # print(self.cromosomos)
 
-    def pontuador(self):
+    def pontuar_individuo(self, individuo, avisos):
         geracao = len(self.populacoes)-1
         self.notas_populaçao_geracoes[geracao] = {}
+        rate = 0
         for i in self.requisitos:
-            for pop in self.populacoes:
-                for indv in self.populacoes[pop]:
-                    try:
-                        self.notas_populaçao_geracoes[geracao][indv] += i(self.populacoes[geracao][indv])
-                    except KeyError:
-                        self.notas_populaçao_geracoes[geracao][indv] = i(self.populacoes[geracao][indv])
-        print(self.notas_populaçao_geracoes)
+            rate += i(individuo, avisos)
+        return rate
 
+    def pontuar_populacao(self, populacao):
+        pass
     
     

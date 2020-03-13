@@ -26,14 +26,16 @@ class gerador_dados_iniciais:
         for e in range(self.tamanho_geracao):
             cromosomo = {}
             for i, row in self.cadeiras.iterrows():
+                cromosomo[row['id']] = []
                 for q in range(self.qnt_aulas_semana):
                     horario = self.horarios.sample(n=1)
                     sala = self.salas.sample(n=1)
-                    cromosomo[row['id']] = [
+                    cromosomo[row['id']].append([
                     sala['codigo'].values[0],
                     row['periodo'],
                     row['professor'],
-                    horario['id'].values[0]]
+                    horario['id'].values[0],
+                    horario['dia'].values[0]])
             # print(cromosomo)
             geracao[0][len(geracao[0])] = cromosomo
         # print(geracao[0].keys())
