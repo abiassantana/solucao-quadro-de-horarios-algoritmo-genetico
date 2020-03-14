@@ -1,18 +1,39 @@
 id,periodo,credito,professor,nome
 8103104,p1,4,Ayla,Introdução à Programação TUR 1
 8103104,p1,4,Ana Liz,Introdução à Programação TUR 2
+8101105,p1,4,DCS,Introdução à Sociologia
 8103106,p1,4,Ana Liz,Introdução ao Computador
 8101306,p1,4,Substituto,Metodologia Científica
 8108108,p1,4,Eliane,Administração I
 8103108,p1,4,Laudelino,Matemática Elementar
+8103125,p2,4,l5,Linguagem de Programação
+8101104,p2,4,l5,Introdução à Filosofia
+8103140,p2,4,l6,Cálculo Dif. e Integra
+8103126,p2,4,l6,Arquitetura de Computadores I
+8108109,p2,4,l7,Administração II
+8103139,p2,4,l7,Lógica Aplicada a Computação
 8103141,p3,4,Wagner,Alg. e Estrutura de Dados 1
 8103138,p3,4,Raquel,Prog. Orientada a Objetos - POO
+8103147,p3,4,Joseilme,Probabilidade e Estatística
 8103144,p3,4,Wendell,Álgebra Linear e Geom. Analitica
+8103146,p4,4,l10,Alg. e Estrutura de Dados II
+8103151,p4,4,l10,Engenharia de Software
+8103154,p4,4,l11,Paradigmas de Linguagem
+8108113,p4,4,l11,Empreendedorismo
+8101177,p4,4,l12,Introdução à Psicologia
 8103148,p5,4,Leandro,Banco de Dados I
 8103155,p5,4,Juliana/Yuska,Eng. de Software Aplicada
+8101231,p5,4,l13,Ética Profissional
 8103215,p5,4,Raquel,Sistemas Operacionais
 8103152,p5,4,Hacks,Redes de Computadores
 8103145,p5,4,Adson,Pesquisa Aplicada SI 
+8103153,p6,4,l15,Banco de Dados II
+8103149,p6,4,l16,Gerência de Projeto de SW
+8103159,p6,4,l16,Interface com o Usuário
+8103219,p6,4,l17,Proj. Avançado de Software I
+8103158,p6,4,l17,Avaliação de Desemp. de Sist
+8103156,p6,4,l18,Ger. de Redes Computadores
+8103217,p6,4,l18,Gestão da Info. e de S
 8103218,p7,4,Leandro,Desenv. de Sist. Corporativos
 8103220,p7,4,Yuska,Gestão da Qualidade SW
 8103161,p7,4,Marcus,Sistemas Distribuídos

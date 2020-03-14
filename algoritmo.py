@@ -20,7 +20,27 @@ class algoritmo:
             rate += i(individuo, avisos)
         return rate
 
-    def pontuar_populacao(self, populacao):
-        pass
+    def pontuar_populacao(self, populacao, avisos):
+        for indv in populacao:
+            rate_indv = self.pontuar_individuo(populacao[indv], avisos)
+            populacao[indv]['rate'] = rate_indv
+
+    def fitness_populacao_atual(self):
+        self.pontuar_populacao(self.populacoes[len(self.populacoes)-1], False)
+
+    def carregar_quadro_csv(self,csv):
+            quadro_csv = self.gerador_inicial.carregar_csv(csv)
+            quadro = {}
+            for i, row in quadro_csv.iterrows():
+                sala = None
+                periodo = row['periodo']
+                professor = row['professor']
+                horario1 = row['horario1']
+                dia1 = row['dia1']
+                horario2 =row['horario2']
+                dia2 = row['dia2']
+                quadro[row['id']] = [[sala,periodo,professor,horario1,dia1],[sala,periodo,professor,horario2,dia2]]
+            return quadro
+
     
     

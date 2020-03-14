@@ -1,0 +1,21 @@
+id,periodo,credito,horario1,dia1,horario2,dia2,professor,nome
+8103104,p1,4,h2,segunda,h10,quinta,Ayla,Introdução à Programação TUR 1
+8103104,p1,4,h2,segunda,h13,sexta,Ana Liz,Introdução à Programação TUR 2
+8103106,p1,4,h14,sexta,h15,sexta,Ana Liz,Introdução ao Computador
+8101306,p1,4,h4,terca,h7,quarta,Substituto,Metodologia Científica
+8108108,p1,4,h4,terca,h8,quarta,Eliane,Administração I
+8103108,p1,4,h1,segunda,h10,quinta,Laudelino,Matemática Elementar
+8103141,p3,4,h2,segunda,h10,quinta,Wagner,Alg. e Estrutura de Dados 1
+8103138,p3,4,h5,terca,h7,quarta,Raquel,Prog. Orientada a Objetos - POO
+8103144,p3,4,h1,segunda,h11,quinta,Wendell,Álgebra Linear e Geom. Analitica
+8103148,p5,4,h13,sexta,h14,sexta,Leandro,Banco de Dados I
+8103155,p5,4,h2,segunda,h11,quinta,Juliana/Yuska,Eng. de Software Aplicada
+8103215,p5,4,h4,terca,h11,quinta,Raquel,Sistemas Operacionais
+8103152,p5,4,h3,segunda,h10,quinta,Hacks,Redes de Computadores
+8103145,p5,4,h5,terca,h12,quinta,Adson,Pesquisa Aplicada SI 
+8103218,p7,4,h12,quinta,h15,sexta,Leandro,Desenv. de Sist. Corporativos
+8103220,p7,4,h10,quinta,h6,terca,Yuska,Gestão da Qualidade SW
+8103161,p7,4,h2,segunda,h13,sexta,Marcus,Sistemas Distribuídos
+8103209,p7,4,h1,segunda,h5,terca,Hacks,Auditoria e Seg. de Sistemas
+8103160,p7,4,h7,quarta,h8,quarta,Luiz,Sistemas de Apoio a Gestão
+8103157,p7,4,h3,segunda,h14,sexta,Marcus,Intelig. Artificial e Sistemas Espec.
