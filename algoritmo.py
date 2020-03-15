@@ -1,4 +1,6 @@
 from dados_iniciais import gerador_dados_iniciais
+from operator import itemgetter 
+import random
 
 class algoritmo:
 
@@ -10,6 +12,9 @@ class algoritmo:
         self.populacoes = self.gerador_inicial.gerar_quadros_iniciais()
         self.notas_populaçao_geracoes = {}
         self.requisitos = requisitos
+        self.n_best_generation = {}
+        self.torneio(5)
+        self.crossover()
         # print(self.cromosomos)
 
     def pontuar_individuo(self, individuo, avisos):
@@ -41,6 +46,40 @@ class algoritmo:
                 dia2 = row['dia2']
                 quadro[row['id']] = [[sala,periodo,professor,horario1,dia1],[sala,periodo,professor,horario2,dia2]]
             return quadro
+
+    def get_geracao_atual(self):
+        return len(self.populacoes)-1
+
+    def key(self,dic):
+        return dic[1]['rate']
+
+    def torneio(self, t):
+        self.fitness_populacao_atual()
+        # dict_sorted = sorted(self.populacoes[self.get_geracao_atual()].items(), key = self.key, reverse = False)
+        # print(dict_sorted)
+        winners = []
+        for i in range(self.tamanho_geracao):
+            indivs_torneio_keys = random.sample(list(self.populacoes[self.get_geracao_atual()]), t)
+            indivs_torneio = {}
+            for e in indivs_torneio_keys:
+                indivs_torneio[e] = self.populacoes[self.get_geracao_atual()][e]
+            dict_sorted = sorted(indivs_torneio.items(), key = self.key, reverse = False)
+            winners.append(dict_sorted[0])
+        return winners
+
+        # n_best = {}
+        # count = 0
+        # for i in range(n):
+        #     n_best[dict_sorted[i][0]] =  dict_sorted[i][1]
+        # self.n_best_generation[self.get_geracao_atual] = n_best
+
+    def crossover(self):
+        # keys = list(self.n_best_generation[self.get_geracao_atual()].keys())
+        winners = self.torneio(5)
+        
+        
+    
+
 
     
     
