@@ -13,7 +13,6 @@ class algoritmo:
         self.notas_populaçao_geracoes = {}
         self.requisitos = requisitos
         self.n_best_generation = {}
-        self.torneio(5)
         self.crossover()
         # print(self.cromosomos)
 
@@ -76,7 +75,30 @@ class algoritmo:
     def crossover(self):
         # keys = list(self.n_best_generation[self.get_geracao_atual()].keys())
         winners = self.torneio(5)
-        
+        filhos = {}
+        for i in range(self.tamanho_geracao):
+            p1 = winners[random.randint(0,len(winners)-1)]
+            p2 = winners[random.randint(0,len(winners)-1)]
+            while p1 == p2:
+                p2 = winners[random.randint(0,len(winners)-1)]
+            for e in range(2):
+                ponto_crossover = random.randint(1,len(p1[1]))
+                count = 0
+                # print(p1[1])
+                indv_id = len(filhos)
+                filhos[indv_id] = {}
+                for cromo in p1[1]:
+                    if count <= ponto_crossover:
+                        filhos[indv_id][cromo] = p1[1][cromo]
+                        count+=1
+                count = 0
+                for crom in p2[1]:
+                    if count > ponto_crossover:
+                        filhos[indv_id][cromo] = p2[1][crom]
+                    count+=1
+        return filhos
+            
+
         
     
 
