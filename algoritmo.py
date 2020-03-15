@@ -6,14 +6,15 @@ class algoritmo:
 
     gerador_inicial = None
 
-    def __init__(self, csv_salas, horarios_csv, cadeiras_csv, tamanho_geracao, requisitos):
+    def __init__(self, csv_salas, horarios_csv, cadeiras_csv, tamanho_geracao, requisitos, total_generations):
+        self.total_generations = total_generations
         self.tamanho_geracao = tamanho_geracao
         self.gerador_inicial = gerador_dados_iniciais(csv_salas, horarios_csv, cadeiras_csv, self.tamanho_geracao)
         self.populacoes = self.gerador_inicial.gerar_quadros_iniciais()
         self.notas_populaçao_geracoes = {}
         self.requisitos = requisitos
         self.n_best_generation = {}
-        self.main()
+        self.main(self.total_generations)
         
         # print(self.cromosomos)
 
@@ -31,7 +32,7 @@ class algoritmo:
             populacao[indv]['rate'] = rate_indv
 
     def fitness_populacao_atual(self):
-        self.pontuar_populacao(self.populacoes[len(self.populacoes)-1], False)
+        self.pontuar_populacao(self.populacoes[self.get_geracao_atual()], False)
 
     def carregar_quadro_csv(self,csv):
             quadro_csv = self.gerador_inicial.carregar_csv(csv)
@@ -54,7 +55,7 @@ class algoritmo:
         return dic[1]['rate']
 
     def torneio(self, t):
-        self.fitness_populacao_atual()
+        
         # dict_sorted = sorted(self.populacoes[self.get_geracao_atual()].items(), key = self.key, reverse = False)
         # print(dict_sorted)
         winners = []
@@ -67,11 +68,6 @@ class algoritmo:
             winners.append(dict_sorted[0])
         return winners
 
-        # n_best = {}
-        # count = 0
-        # for i in range(n):
-        #     n_best[dict_sorted[i][0]] =  dict_sorted[i][1]
-        # self.n_best_generation[self.get_geracao_atual] = n_best
 
     def crossover(self):
         # keys = list(self.n_best_generation[self.get_geracao_atual()].keys())
@@ -82,21 +78,21 @@ class algoritmo:
             p2 = winners[random.randint(0,len(winners)-1)]
             while p1 == p2:
                 p2 = winners[random.randint(0,len(winners)-1)]
-            for e in range(2):
-                ponto_crossover = random.randint(1,len(p1[1]))
-                count = 0
-                # print(p1[1])
-                indv_id = len(filhos)
-                filhos[indv_id] = {}
-                for cromo in p1[1]:
-                    if count <= ponto_crossover:
-                        filhos[indv_id][cromo] = p1[1][cromo]
-                        count+=1
-                count = 0
-                for crom in p2[1]:
-                    if count > ponto_crossover:
-                        filhos[indv_id][cromo] = p2[1][crom]
+            ponto_crossover = random.randint(1,len(p1[1]))
+            count = 0
+            # print(p1[1])
+            indv_id = len(filhos)
+            filhos[indv_id] = {}
+            for cromo in p1[1]:
+                if count <= ponto_crossover:
+                    filhos[indv_id][cromo] = p1[1][cromo]
                     count+=1
+            for crom in p2[1]:
+                if count > ponto_crossover:
+                    filhos[indv_id][crom] = p2[1][crom]
+            # print(len(filhos[indv_id]))
+            del filhos[indv_id]['rate']
+        # print(len(self.populacoes[self.get_geracao_atual()]))
         return filhos
 
     def mutacao(self, populacao):
@@ -122,10 +118,33 @@ class algoritmo:
                 return row
         return None
 
-    def main(self):
-        crosover = self.crossover()
-        self.mutacao(crosover)
+    def new_generation(self, populacao):
+        self.populacoes[self.get_geracao_atual()+1] = populacao
+
+    def get_n_bests(self, populacao, n):
+        sorted_pop = sorted(populacao.items(), key = self.key, reverse = False)
+        bests = []
+        for indv in sorted_pop:
+            bests.append(indv)
+        return bests[:5]
+
+    def main(self, total_generations):
+        sair = False
+        while not sair:
+            self.fitness_populacao_atual()
+            crosover = self.crossover()
+            self.mutacao(crosover)
+            self.new_generation(crosover)
+            if self.get_geracao_atual() >= total_generations:
+                sair = True
+        print(self.get_n_bests(self.populacoes[self.get_geracao_atual()-1], 5))
         
+        
+
+        
+
+    
+
             
 
         
