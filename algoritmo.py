@@ -13,7 +13,8 @@ class algoritmo:
         self.notas_populaçao_geracoes = {}
         self.requisitos = requisitos
         self.n_best_generation = {}
-        self.crossover()
+        self.main()
+        
         # print(self.cromosomos)
 
     def pontuar_individuo(self, individuo, avisos):
@@ -97,6 +98,34 @@ class algoritmo:
                         filhos[indv_id][cromo] = p2[1][crom]
                     count+=1
         return filhos
+
+    def mutacao(self, populacao):
+        for indv in populacao:
+            gene = random.choice(list(populacao[indv]))
+            while gene == 'rate':
+                gene = random.choice(list(populacao[indv]))
+            cadeira = self.find_key_in_cadeiras(gene)
+            horario = self.gerador_inicial.horarios.sample(n=1)
+            sala = self.gerador_inicial.salas.sample(n=1)
+            new_gene = [
+            sala['codigo'].values[0],
+            cadeira['periodo'],
+            cadeira['professor'],
+            horario['id'].values[0],
+            horario['dia'].values[0]]
+            tamanho_gene = len(populacao[indv][gene])
+            populacao[indv][gene][random.randint(0,tamanho_gene-1)] = new_gene
+
+    def find_key_in_cadeiras(self, key):
+        for i, row in self.gerador_inicial.cadeiras.iterrows():
+            if row['id'] == key:
+                return row
+        return None
+
+    def main(self):
+        crosover = self.crossover()
+        self.mutacao(crosover)
+        
             
 
         
