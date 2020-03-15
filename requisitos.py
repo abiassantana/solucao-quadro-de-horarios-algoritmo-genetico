@@ -23,8 +23,7 @@ def diciplina_mesmo_p_h(indiv, avisos):
                                 print('- disciplina: '+str(i)+', período: '+str(au[1])+
                                 ', dia: '+au[4]+', horário: '+au[3]+', professor: '+au[2])
                                 print('- disciplina: '+str(gene)+', período: '+str(periodo)+
-                                ', dia: '+aula[4]+', horário: '+horario+', professor: '+aula[2])
-    # print(indiv)       
+                                ', dia: '+aula[4]+', horário: '+horario+', professor: '+aula[2])       
     return rate
 
 # verifica se exitem aulas de disciplinas do mesmo

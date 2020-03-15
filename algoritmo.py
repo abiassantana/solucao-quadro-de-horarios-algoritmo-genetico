@@ -1,20 +1,22 @@
 from dados_iniciais import gerador_dados_iniciais
 from operator import itemgetter 
+import pandas as pd
 import random
 
 class algoritmo:
 
     gerador_inicial = None
 
-    def __init__(self, csv_salas, horarios_csv, cadeiras_csv, tamanho_geracao, requisitos, total_generations):
-        self.total_generations = total_generations
+    def __init__(self, csv_salas, horarios_csv, cadeiras_csv, tamanho_geracao, requisitos, funcao_parada, n_results):
+        self.n_results = n_results
+        self.funcao_parada = funcao_parada
         self.tamanho_geracao = tamanho_geracao
         self.gerador_inicial = gerador_dados_iniciais(csv_salas, horarios_csv, cadeiras_csv, self.tamanho_geracao)
         self.populacoes = self.gerador_inicial.gerar_quadros_iniciais()
         self.notas_populaçao_geracoes = {}
         self.requisitos = requisitos
         self.n_best_generation = {}
-        self.main(self.total_generations)
+        self.main()
         
         # print(self.cromosomos)
 
@@ -128,17 +130,44 @@ class algoritmo:
             bests.append(indv)
         return bests[:5]
 
-    def main(self, total_generations):
+    def main(self):
         sair = False
         while not sair:
             self.fitness_populacao_atual()
-            crosover = self.crossover()
-            self.mutacao(crosover)
-            self.new_generation(crosover)
-            if self.get_geracao_atual() >= total_generations:
+            if self.funcao_parada(self.populacoes[self.get_geracao_atual()]):
                 sair = True
-        print(self.get_n_bests(self.populacoes[self.get_geracao_atual()-1], 5))
+            else:
+                crosover = self.crossover()
+                self.mutacao(crosover)
+                self.new_generation(crosover)
+            
+        print('Objetivo de quadros atingidos. Resultados foram exportados para pasta resultados')
+        self.conver_result_csvs(self.get_n_bests(self.populacoes[self.get_geracao_atual()], self.n_results))
+
+    def find_key_in_horarios(self, key):
+        for i, row in self.gerador_inicial.horarios.iterrows():
+            if row['id'] == key:
+                return row
+        return None
+
+    def conver_result_csvs(self, populacao):
+        aulas = {'codigo_vadeira':[], 'sala':[], 'periodo':[], 'professor':[], 'horario':[], 'dia':[]}
+        for indv in populacao:
+            for gene in indv[1]:
+                if gene != 'rate':
+                    for g in indv[1][gene]:
+                        horario = self.find_key_in_horarios(g[3])
+                        aulas['codigo_vadeira'].append(gene)
+                        aulas['sala'].append(g[0])
+                        aulas['periodo'].append(g[1])
+                        aulas['professor'].append(g[2])
+                        aulas['horario'].append(horario['hora'])
+                        aulas['dia'].append(g[4])
+            df = pd.DataFrame(data=aulas)
+            df.to_csv('resultados/resultado_'+str(indv[0])+'.csv')
         
+
+
         
 
         
