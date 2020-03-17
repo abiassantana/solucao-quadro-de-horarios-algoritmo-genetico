@@ -11,4 +11,6 @@ def funcao_parada(populacao):
         if count >= 4:
             return True
     return False
+
 a = algoritmo('csv/salas.csv', 'csv/horarios.csv', 'csv/cadeiras.csv', 50, requisitos, funcao_parada, 4)
+a.main()

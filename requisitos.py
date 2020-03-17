@@ -5,7 +5,7 @@
 # caso encontre retorna infinito
 def diciplina_mesmo_p_h(indiv, avisos):
     rate = 0
-    peso = float("+inf")
+    peso = 1000
     for gene in indiv:
         for aula in indiv[gene]:
             periodo = aula[1]
@@ -30,7 +30,7 @@ def diciplina_mesmo_p_h(indiv, avisos):
 # professor no mesmo dia e horário 
 def professor_mesmo_h(indiv, avisos):
     rate = 0
-    peso = float("+inf")
+    peso = 1000
     for gene in indiv:
         for aula in indiv[gene]:
             professor = aula[2]
@@ -53,7 +53,7 @@ def professor_mesmo_h(indiv, avisos):
     return rate
 
 # verifica se exitem aulas da mesma
-# disciplina no mesmo dia e horario
+# disciplina no mesmo dia
 def diciplina_mesmo_dia(indiv, avisos):
     peso = 10
     rate = 0
@@ -65,7 +65,7 @@ def diciplina_mesmo_dia(indiv, avisos):
             for i in indiv:
                 count = 0
                 for au in indiv[i]:
-                    if disciplina == i and horario == au[3] and dia == au[4]:
+                    if disciplina == i and dia == au[4]:
                         count+=1
                         if count >= 2 and gene != i:
                             rate += peso

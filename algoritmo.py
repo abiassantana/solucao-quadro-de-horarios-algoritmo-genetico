@@ -16,7 +16,6 @@ class algoritmo:
         self.notas_populaçao_geracoes = {}
         self.requisitos = requisitos
         self.n_best_generation = {}
-        self.main()
         
         # print(self.cromosomos)
 
@@ -35,6 +34,15 @@ class algoritmo:
 
     def fitness_populacao_atual(self):
         self.pontuar_populacao(self.populacoes[self.get_geracao_atual()], False)
+
+    # def get_melhor_indiv_geracao(self, geracao):
+    #     best = {'rate': float('+inf')}
+    #     for indv in self.populacoes[geracao]:
+    #         if self.populacoes[geracao][indv]['rate'] < best['rate']:
+    #             best = self.populacoes[geracao][indv]
+    #     del self.populacoes[geracao][indv]['rate']
+    #     self.pontuar_individuo(self.populacoes[geracao][indv], True)
+    #     return best
 
     def carregar_quadro_csv(self,csv):
             quadro_csv = self.gerador_inicial.carregar_csv(csv)
@@ -128,19 +136,44 @@ class algoritmo:
         bests = []
         for indv in sorted_pop:
             bests.append(indv)
-        return bests[:5]
+        return bests[:n]
+
+    def find_key_populacao(self, populacao, individuo):
+        keys = populacao.keys()
+        for k in keys:
+            # print(populacao[k])
+            if populacao[k] == individuo:
+                return k
+        return None
+
+    def relatorio_geracao(self, populacao):
+        best = populacao[self.get_n_bests(populacao, 1)[0][0]].copy()
+        key = self.find_key_populacao(populacao, best)
+        del best['rate']
+        best['rate'] = self.pontuar_individuo(best, True)
+        dados = {'numero': [self.get_geracao_atual()], 'best_id': [key], 'fitness': [best['rate']]}
+        df = pd.DataFrame(data=dados)
+        df.to_csv('geracoes/relatorio_geracao_'+str(self.get_geracao_atual())+'.csv', index=False)
+        return {'best': best, 'id': key}
+
+    
 
     def main(self):
         sair = False
         while not sair:
             self.fitness_populacao_atual()
+            print('Geração atual: '+str(self.get_geracao_atual()))
+            best = self.relatorio_geracao(self.populacoes[self.get_geracao_atual()])
+            # print(best)
+            print('Relatorio melhor individuo: ')
+            print('ID do melhor indiviuo da geração: '+str(best['id'])+', fitness melhor individuo: '+str(best['best']['rate']))
+            # print(best)
             if self.funcao_parada(self.populacoes[self.get_geracao_atual()]):
                 sair = True
             else:
                 crosover = self.crossover()
                 self.mutacao(crosover)
                 self.new_generation(crosover)
-            
         print('Objetivo de quadros atingidos. Resultados foram exportados para pasta resultados')
         self.conver_result_csvs(self.get_n_bests(self.populacoes[self.get_geracao_atual()], self.n_results))
 
@@ -164,7 +197,7 @@ class algoritmo:
                         aulas['horario'].append(horario['hora'])
                         aulas['dia'].append(g[4])
             df = pd.DataFrame(data=aulas)
-            df.to_csv('resultados/resultado_'+str(indv[0])+'.csv')
+            df.to_csv('resultados/resultado_'+str(indv[0])+'.csv', index=False)
         
 
 
