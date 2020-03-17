@@ -1,7 +1,7 @@
 from algoritmo import algoritmo
 import requisitos as req
 
-requisitos = [req.diciplina_mesmo_p_h, req.professor_mesmo_h, req.diciplina_mesmo_dia]
+requisitos = [req.diciplina_mesmo_p_h, req.professor_mesmo_h, req.diciplina_mesmo_dia, req.aulas_concecutivas]
 
 def funcao_parada(populacao):
     count = 0

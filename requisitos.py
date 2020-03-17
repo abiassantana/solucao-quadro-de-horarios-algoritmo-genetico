@@ -1,4 +1,4 @@
-
+import re
 
 # verifica se exitem aulas de disciplinas
 # do mesmo período no mesmo dia e horário 
@@ -78,4 +78,21 @@ def diciplina_mesmo_dia(indiv, avisos):
     return rate
 
 
-
+def aulas_concecutivas(indiv, avisos):
+    peso = 10
+    rate = 0
+    for gene in indiv:
+        for g in indiv[gene]:
+            for gen in indiv:
+                for ge in indiv[gene]:
+                    horario1 = int(re.sub('[^0-9]', '', g[3]))
+                    horario2 = int(re.sub('[^0-9]', '', ge[3]))
+                    if gen == gene and horario1 == horario2+1 and g[4] == ge[4] or gen == gene and horario1 == horario2-1 and g[4] == ge[4]:
+                        rate+=peso
+                        if avisos:
+                            print('Alocações com disciplinas em horarios consecutivas (custo = '+str(peso)+')')
+                            print('- disciplina: '+str(gene)+', período: '+str(g[1])+
+                                ', dia: '+g[4]+', horário: '+g[3]+', professor: '+g[2])
+                            print('- disciplina: '+str(ge)+', período: '+str(g[1])+
+                                ', dia: '+ge[4]+', horário: '+ge[3]+', professor: '+ge[2])
+    return rate
