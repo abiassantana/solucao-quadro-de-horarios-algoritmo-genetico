@@ -184,14 +184,13 @@ class algoritmo:
         return None
 
     def conver_result_csvs(self, populacao):
-        aulas = {'codigo_cadeira':[],'nome': [], 'sala':[], 'periodo':[], 'professor':[], 'horario':[], 'dia':[]}
+        aulas = {'codigo_cadeira':[],'nome': [], 'periodo':[], 'professor':[], 'horario':[], 'dia':[]}
         for indv in populacao:
             for gene in indv[1]:
                 if gene != 'rate':
                     for g in indv[1][gene]:
                         horario = self.find_key_in_horarios(g[3])
                         aulas['codigo_cadeira'].append(gene)
-                        aulas['sala'].append(g[0])
                         aulas['periodo'].append(g[1])
                         aulas['professor'].append(g[2])
                         aulas['horario'].append(horario['hora'])
