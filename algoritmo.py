@@ -78,6 +78,28 @@ class algoritmo:
             winners.append(dict_sorted[0])
         return winners
 
+    def crossover_inicio(self, p1, p2, ponto_crossover,filhos,indv_id):
+        count = 0
+        for cromo in p1[1]:
+                if count <= ponto_crossover:
+                    filhos[indv_id][cromo] = p1[1][cromo]
+                    count+=1
+        for crom in p2[1]:
+            if count > ponto_crossover:
+                filhos[indv_id][crom] = p2[1][crom]
+        return filhos
+
+    def crossover_fim(self, p1, p2, ponto_crossover,filhos,indv_id):
+        count = 0
+        for cromo in p1[1]:
+                if count <= ponto_crossover:
+                    filhos[indv_id][cromo] = p2[1][cromo]
+                    count+=1
+        for crom in p2[1]:
+            if count > ponto_crossover:
+                filhos[indv_id][crom] = p1[1][crom]
+        return filhos
+    
 
     def crossover(self):
         # keys = list(self.n_best_generation[self.get_geracao_atual()].keys())
@@ -93,13 +115,8 @@ class algoritmo:
             # print(p1[1])
             indv_id = len(filhos)
             filhos[indv_id] = {}
-            for cromo in p1[1]:
-                if count <= ponto_crossover:
-                    filhos[indv_id][cromo] = p1[1][cromo]
-                    count+=1
-            for crom in p2[1]:
-                if count > ponto_crossover:
-                    filhos[indv_id][crom] = p2[1][crom]
+            cross = [self.crossover_inicio, self.crossover_fim]
+            cross[random.randint(0,len(cross)-1)](p1, p2, ponto_crossover,filhos,indv_id)
             # print(len(filhos[indv_id]))
             del filhos[indv_id]['rate']
         # print(len(self.populacoes[self.get_geracao_atual()]))
@@ -163,9 +180,9 @@ class algoritmo:
         while not sair:
             self.fitness_populacao_atual()
             print('Geração atual: '+str(self.get_geracao_atual()))
-            best = self.relatorio_geracao(self.populacoes[self.get_geracao_atual()])
             # print(best)
             print('Relatorio melhor individuo: ')
+            best = self.relatorio_geracao(self.populacoes[self.get_geracao_atual()])
             print('ID do melhor indiviuo da geração: '+str(best['id'])+', fitness melhor individuo: '+str(best['best']['rate']))
             # print(best)
             if self.funcao_parada(self.populacoes[self.get_geracao_atual()]):

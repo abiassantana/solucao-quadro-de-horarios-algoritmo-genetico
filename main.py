@@ -6,9 +6,9 @@ requisitos = [req.diciplina_mesmo_p_h, req.professor_mesmo_h, req.diciplina_mesm
 def funcao_parada(populacao):
     count = 0
     for indv in populacao:
-        if populacao[indv]['rate'] < float('inf'):
+        if populacao[indv]['rate'] == 0:
             count+=1
-        if count >= 4:
+        if count >= 1:
             return True
     return False
 
