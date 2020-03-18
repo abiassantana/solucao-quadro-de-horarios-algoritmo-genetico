@@ -36,7 +36,8 @@ class gerador_dados_iniciais:
                     row['professor'],
                     horario['id'].values[0],
                     horario['dia'].values[0],
-                    row['nome']])
+                    row['nome'],
+                    row['curso']])
             # print(cromosomo)
             geracao[0][len(geracao[0])] = cromosomo
         # print(geracao[0].keys())

@@ -2,12 +2,14 @@ from dados_iniciais import gerador_dados_iniciais
 from operator import itemgetter 
 import pandas as pd
 import random
+import os
 
 class algoritmo:
 
     gerador_inicial = None
 
-    def __init__(self, csv_salas, horarios_csv, cadeiras_csv, tamanho_geracao, requisitos, funcao_parada, n_results):
+    def __init__(self, csv_salas, horarios_csv, cadeiras_csv, tamanho_geracao, requisitos, funcao_parada, n_results, cursos):
+        self.cursos = cursos
         self.n_results = n_results
         self.funcao_parada = funcao_parada
         self.tamanho_geracao = tamanho_geracao
@@ -201,20 +203,26 @@ class algoritmo:
         return None
 
     def conver_result_csvs(self, populacao):
-        aulas = {'codigo_cadeira':[],'nome': [], 'periodo':[], 'professor':[], 'horario':[], 'dia':[]}
+        cursos = {}
+        for c in self.cursos:
+            cursos[c] = {'codigo_cadeira':[],'nome': [], 'periodo':[], 'professor':[], 'horario':[], 'dia':[]}
         for indv in populacao:
             for gene in indv[1]:
                 if gene != 'rate':
                     for g in indv[1][gene]:
                         horario = self.find_key_in_horarios(g[3])
-                        aulas['codigo_cadeira'].append(gene)
-                        aulas['periodo'].append(g[1])
-                        aulas['professor'].append(g[2])
-                        aulas['horario'].append(horario['hora'])
-                        aulas['dia'].append(g[4])
-                        aulas['nome'].append(g[5])
-            df = pd.DataFrame(data=aulas)
-            df.to_csv('resultados/resultado_'+str(indv[0])+'.csv', index=False)
+                        cursos[g[6]]['codigo_cadeira'].append(gene)
+                        cursos[g[6]]['periodo'].append(g[1])
+                        cursos[g[6]]['professor'].append(g[2])
+                        cursos[g[6]]['horario'].append(horario['hora'])
+                        cursos[g[6]]['dia'].append(g[4])
+                        cursos[g[6]]['nome'].append(g[5])
+            for i in cursos:
+                try:
+                    df = pd.DataFrame(data=cursos[i])
+                    df.to_csv('resultados_'+str(i)+'/resultado_'+str(indv[0])+'.csv', index=False)
+                except FileNotFoundError:
+                    os.mkdir('./resultados_'+str(i))
         
 
 

@@ -6,11 +6,11 @@ requisitos = [req.diciplina_mesmo_p_h, req.professor_mesmo_h, req.diciplina_mesm
 def funcao_parada(populacao):
     count = 0
     for indv in populacao:
-        if populacao[indv]['rate'] == 0:
+        if populacao[indv]['rate'] < 9999:
             count+=1
         if count >= 1:
             return True
     return False
-
-a = algoritmo('csv/salas.csv', 'csv/horarios.csv', 'csv/cadeiras.csv', 50, requisitos, funcao_parada, 4)
+cursos = ['lcc','si']
+a = algoritmo('csv/salas.csv', 'csv/horarios.csv', 'csv/cadeiras.csv', 50, requisitos, funcao_parada, 4,cursos)
 a.main()
