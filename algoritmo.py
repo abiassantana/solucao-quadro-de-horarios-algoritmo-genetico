@@ -8,12 +8,12 @@ class algoritmo:
 
     gerador_inicial = None
 
-    def __init__(self, csv_salas, horarios_csv, cadeiras_csv, tamanho_geracao, requisitos, funcao_parada, n_results, cursos):
+    def __init__(self, csv_salas, horarios_csv, cadeiras_csv,qnt_aulas_semana, tamanho_geracao, requisitos, funcao_parada, n_results, cursos):
         self.cursos = cursos
         self.n_results = n_results
         self.funcao_parada = funcao_parada
         self.tamanho_geracao = tamanho_geracao
-        self.gerador_inicial = gerador_dados_iniciais(csv_salas, horarios_csv, cadeiras_csv, self.tamanho_geracao)
+        self.gerador_inicial = gerador_dados_iniciais(csv_salas, horarios_csv, cadeiras_csv, qnt_aulas_semana, self.tamanho_geracao)
         self.populacoes = self.gerador_inicial.gerar_quadros_iniciais()
         self.notas_populaçao_geracoes = {}
         self.requisitos = requisitos
@@ -175,7 +175,11 @@ class algoritmo:
         df.to_csv('geracoes/relatorio_geracao_'+str(self.get_geracao_atual())+'.csv', index=False)
         return {'best': best, 'id': key}
 
-    
+    def funcao_parada_principal(self):
+        for f in self.funcao_parada:
+            if f(self):
+                return True
+        return False
 
     def main(self):
         sair = False
@@ -187,7 +191,7 @@ class algoritmo:
             best = self.relatorio_geracao(self.populacoes[self.get_geracao_atual()])
             print('ID do melhor indiviuo da geração: '+str(best['id'])+', fitness melhor individuo: '+str(best['best']['rate']))
             # print(best)
-            if self.funcao_parada(self.populacoes[self.get_geracao_atual()]):
+            if self.funcao_parada_principal():
                 sair = True
             else:
                 crosover = self.crossover()
@@ -206,17 +210,19 @@ class algoritmo:
         cursos = {}
         for c in self.cursos:
             cursos[c] = {'codigo_cadeira':[],'nome': [], 'periodo':[], 'professor':[], 'horario':[], 'dia':[]}
+        print(cursos)
         for indv in populacao:
             for gene in indv[1]:
                 if gene != 'rate':
                     for g in indv[1][gene]:
-                        horario = self.find_key_in_horarios(g[3])
-                        cursos[g[6]]['codigo_cadeira'].append(gene)
-                        cursos[g[6]]['periodo'].append(g[1])
-                        cursos[g[6]]['professor'].append(g[2])
-                        cursos[g[6]]['horario'].append(horario['hora'])
-                        cursos[g[6]]['dia'].append(g[4])
-                        cursos[g[6]]['nome'].append(g[5])
+                        for i in g[6]:
+                            horario = self.find_key_in_horarios(g[3])
+                            cursos[i]['codigo_cadeira'].append(gene)
+                            cursos[i]['periodo'].append(g[1])
+                            cursos[i]['professor'].append(g[2])
+                            cursos[i]['horario'].append(horario['hora'])
+                            cursos[i]['dia'].append(g[4])
+                            cursos[i]['nome'].append(g[5])
             for i in cursos:
                 try:
                     df = pd.DataFrame(data=cursos[i])

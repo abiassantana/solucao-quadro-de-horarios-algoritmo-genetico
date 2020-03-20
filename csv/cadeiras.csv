@@ -1,13 +1,13 @@
 id,periodo,credito,professor,nome,curso
-8103104,p1,4,Ayla,Introdução à Programação TUR 1,si
-8103104,p1,4,Ana Liz,Introdução à Programação TUR 2,si
+8103104,p1,4,Ayla,Introdução à Programação TUR 1,si/lcc
+8103104,p1,4,Ana Liz,Introdução à Programação TUR 2,si/lcc
 8103106,p1,4,Ana Liz,Introdução ao Computador,si
 8101306,p1,4,Substituto,Metodologia Científica,si
 8108108,p1,4,Eliane,Administração I,si
 8103108,p1,4,Laudelino,Matemática Elementar,si
 8103141,p3,4,Wagner,Alg. e Estrutura de Dados 1,si
 8103138,p3,4,Raquel,Prog. Orientada a Objetos - POO,si
-8103144,p3,4,Wendell,Álgebra Linear e Geom. Analitica,si
+8103144,p3,4,Wendell,Álgebra Linear e Geom. Analitica,si/lcc
 8103148,p5,4,Leandro,Banco de Dados I,si
 8103155,p5,4,Juliana/Yuska,Eng. de Software Aplicada,si
 8103215,p5,4,Raquel,Sistemas Operacionais,si
@@ -18,7 +18,7 @@ id,periodo,credito,professor,nome,curso
 8103161,p7,4,Marcus,Sistemas Distribuídos,si
 8103209,p7,4,Hacks,Auditoria e Seg. de Sistemas,si
 8103160,p7,4,Luiz,Sistemas de Apoio a Gestão,si
-8103157,p7,4,Marcus,Intelig. Artificial e Sistemas Espec.,si
+8103157,p7,4,Marcus,Intelig. Artificial e Sistemas Espec.,si/lcc
 1,p1,4,Vanessa/Rafael,IP,lcc
 2,p1,4,Thaise,Metodologia,lcc
 3,p1,4,Laudelino,Mat. Elementar,lcc
@@ -48,6 +48,5 @@ id,periodo,credito,professor,nome,curso
 27,p7,4,Flávia,EAD,lcc
 28,p7,4,Leandro,Eng. de Software,lcc
 29,p7,4,Flávia,PMI,lcc
-30,p7,4,Marcus,IA,lcc
 31,p7,4,Thaise,ESII,lcc
 

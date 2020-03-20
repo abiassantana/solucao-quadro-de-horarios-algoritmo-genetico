@@ -8,12 +8,12 @@ class gerador_dados_iniciais:
     salas = []
     
 
-    def __init__(self, salas_csv, horarios_csv, cadeiras_csv, tamanho_geracao):
+    def __init__(self, salas_csv, horarios_csv, cadeiras_csv, qnt_aulas_semana, tamanho_geracao):
         self.tamanho_geracao = tamanho_geracao
         self.horarios = self.carregar_csv(horarios_csv)
         self.salas = self.carregar_csv(salas_csv)
         self.cadeiras = self.carregar_csv(cadeiras_csv)
-        self.qnt_aulas_semana = 2
+        self.qnt_aulas_semana = qnt_aulas_semana
         
             
     def carregar_csv(self, csv):
@@ -37,7 +37,7 @@ class gerador_dados_iniciais:
                     horario['id'].values[0],
                     horario['dia'].values[0],
                     row['nome'],
-                    row['curso']])
+                    row['curso'].split('/')])
             # print(cromosomo)
             geracao[0][len(geracao[0])] = cromosomo
         # print(geracao[0].keys())
