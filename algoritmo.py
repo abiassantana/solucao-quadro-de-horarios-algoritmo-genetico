@@ -106,7 +106,7 @@ class algoritmo:
 
     def crossover(self):
         # keys = list(self.n_best_generation[self.get_geracao_atual()].keys())
-        winners = self.torneio(5)
+        winners = self.torneio(50)
         filhos = {}
         for i in range(self.tamanho_geracao):
             p1 = winners[random.randint(0,len(winners)-1)]
@@ -153,6 +153,8 @@ class algoritmo:
 
     def new_generation(self, populacao):
         self.populacoes[self.get_geracao_atual()+1] = populacao
+        # p = populacao.copy()
+        # self.pontuar_populacao(p, False)
 
     def get_n_bests(self, populacao, n):
         sorted_pop = sorted(populacao.items(), key = self.key, reverse = False)
@@ -194,7 +196,7 @@ class algoritmo:
             best = self.relatorio_geracao(self.populacoes[self.get_geracao_atual()])
             print('ID do melhor indiviuo da geração: '+str(best['id'])+', fitness melhor individuo: '+str(best['best']['rate']))
             if best['best']['rate'] <= self.best_solution['rate']:
-                self.best_solution = best['best']
+                self.best_solution = best['best'].copy()
             if self.funcao_parada_principal():
                 sair = True
             else:
@@ -203,7 +205,32 @@ class algoritmo:
                 self.new_generation(crosover)
         print('Objetivo de quadros atingidos. Resultados foram exportados para pasta resultados')
         print('fitness melhor individuo em todas gerações: '+str(self.best_solution['rate']))
+        self.gerar_df_best()
         self.conver_result_csvs(self.get_n_bests(self.populacoes[self.get_geracao_atual()], self.n_results))
+
+    def gerar_df_best(self):
+        cursos = {}
+        for c in self.cursos:
+            cursos[c] = {'codigo_cadeira':[],'nome': [], 'periodo':[], 'professor':[], 'horario':[], 'dia':[]}
+        for gene in self.best_solution:
+            if gene != 'rate':
+                for g in self.best_solution[gene]:
+                    # print(g)
+                    for i in g[6]:
+                        horario = self.find_key_in_horarios(g[3])
+                        cursos[i]['codigo_cadeira'].append(gene)
+                        cursos[i]['periodo'].append(g[1])
+                        cursos[i]['professor'].append(g[2])
+                        cursos[i]['horario'].append(horario['hora'])
+                        cursos[i]['dia'].append(g[4])
+                        cursos[i]['nome'].append(g[5])
+        for i in cursos:
+            df = pd.DataFrame(data=cursos[i])
+            try:
+                df.to_csv('best_resultado_'+str(i)+'/best_resultado_'+str(i)+'.csv', index=False)
+            except FileNotFoundError:
+                os.mkdir('best_resultado_'+str(i))
+                df.to_csv('best_resultado_'+str(i)+'/best_resultado_'+str(i)+'.csv', index=False)
 
     def find_key_in_horarios(self, key):
         for i, row in self.gerador_inicial.horarios.iterrows():
@@ -229,11 +256,12 @@ class algoritmo:
                             cursos[i]['dia'].append(g[4])
                             cursos[i]['nome'].append(g[5])
             for i in cursos:
+                df = pd.DataFrame(data=cursos[i])
                 try:
-                    df = pd.DataFrame(data=cursos[i])
                     df.to_csv('resultados_'+str(i)+'/resultado_'+str(indv[0])+'.csv', index=False)
                 except FileNotFoundError:
                     os.mkdir('./resultados_'+str(i))
+                    df.to_csv('resultados_'+str(i)+'/resultado_'+str(indv[0])+'.csv', index=False)
         
 
 
