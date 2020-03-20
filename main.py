@@ -4,7 +4,7 @@ from util import gerar_grafico_gerações
 
 requisitos = [req.diciplina_mesmo_p_h, req.professor_mesmo_h, req.diciplina_mesmo_dia, req.aulas_concecutivas]
 def parar_pop_1000(algoritmo):
-    if len(algoritmo.populacoes) == 1:
+    if len(algoritmo.populacoes) == 10:
         return True
     return False
 

@@ -1,0 +1,67 @@
+codigo_cadeira,nome,periodo,professor,horario,dia
+8103104,Introdução à Programação TUR 2,p1,Ana Liz,8,terca
+8103104,Introdução à Programação TUR 2,p1,Ana Liz,8,sexta
+8103144,Álgebra Linear e Geom. Analitica,p3,Wendell,8,sexta
+8103144,Álgebra Linear e Geom. Analitica,p3,Wendell,10,segunda
+8103157,Intelig. Artificial e Sistemas Espec.,p7,Marcus,10,terca
+8103157,Intelig. Artificial e Sistemas Espec.,p7,Marcus,8,segunda
+1,IP,p1,Vanessa/Rafael,13,terca
+1,IP,p1,Vanessa/Rafael,10,sexta
+2,Metodologia,p1,Thaise,13,segunda
+2,Metodologia,p1,Thaise,10,terca
+3,Mat. Elementar,p1,Laudelino,8,sexta
+3,Mat. Elementar,p1,Laudelino,13,segunda
+4,Calculo 1,p1,Josevandro,8,terca
+4,Calculo 1,p1,Josevandro,13,terca
+5,Scaico,p1,Int. Comp,8,sexta
+5,Scaico,p1,Int. Comp,13,segunda
+6,Ling. Programação,p2,Ayla,10,sexta
+6,Ling. Programação,p2,Ayla,13,quarta
+7,Arquitetura I,p2,Augusto,13,terca
+7,Arquitetura I,p2,Augusto,10,quarta
+8,Vetorial,p2,Wendhel,13,quarta
+8,Vetorial,p2,Wendhel,13,sexta
+9,Cálculo II,p2,Josevandro,8,sexta
+9,Cálculo II,p2,Josevandro,8,segunda
+10,Estr. de Dados,p3,Wagner,10,quinta
+10,Estr. de Dados,p3,Wagner,10,quinta
+11,Arquitetura II,p3,Rafael,8,terca
+11,Arquitetura II,p3,Rafael,8,quinta
+12,Lógica,p3,Substituto,8,quinta
+12,Lógica,p3,Substituto,10,quarta
+13,Álgebra Linear,p3,Wendhel,13,quinta
+13,Álgebra Linear,p3,Wendhel,13,terca
+14,POO,p3,Rodrigo Vilar,8,quarta
+14,POO,p3,Rodrigo Vilar,13,segunda
+15,Mod. de dados,p4,Pasqueline,13,segunda
+15,Mod. de dados,p4,Pasqueline,8,quinta
+16,SO,p4,Raquel,13,quarta
+16,SO,p4,Raquel,13,quarta
+17,Mod. de dados,p4,Pasqueline,13,sexta
+17,Mod. de dados,p4,Pasqueline,13,segunda
+18,Pesquisa Aplicada,p4,Pasqueline,13,sexta
+18,Pesquisa Aplicada,p4,Pasqueline,10,segunda
+19,Ling. Declarativas,p4,Joelson,13,terca
+19,Ling. Declarativas,p4,Joelson,8,quinta
+20,Empreend.,p5,DSCA,13,segunda
+20,Empreend.,p5,DSCA,8,quinta
+21,Teoria da Comp.,p5,Joelson,10,sexta
+21,Teoria da Comp.,p5,Joelson,8,segunda
+22,Banco de Dados,p5,Vanessa,8,quarta
+22,Banco de Dados,p5,Vanessa,13,terca
+23,Redes,p5,Augusto,8,quarta
+23,Redes,p5,Augusto,13,terca
+24,Sistemas Multimídia,p6,Thaise,13,sexta
+24,Sistemas Multimídia,p6,Thaise,13,segunda
+25,Análise e Projeto,p6,Rodrigo Vilar,10,terca
+25,Análise e Projeto,p6,Rodrigo Vilar,13,quarta
+26,Estatística,p6,Joseilme,10,sexta
+26,Estatística,p6,Joseilme,13,quarta
+27,EAD,p7,Flávia,13,quarta
+27,EAD,p7,Flávia,13,segunda
+28,Eng. de Software,p7,Leandro,13,quarta
+28,Eng. de Software,p7,Leandro,13,terca
+29,PMI,p7,Flávia,8,sexta
+29,PMI,p7,Flávia,13,quinta
+31,ESII,p7,Thaise,13,segunda
+31,ESII,p7,Thaise,10,sexta
